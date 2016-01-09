@@ -1,0 +1,7 @@
+web-monitor/target/
+*.log
+*.1
+.metadata/
+.recommenders/
+Servers/
+RemoteSystemsTempFiles/
