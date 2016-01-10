@@ -1,21 +1,22 @@
-package au.com.temp.config;
+package au.com.resillience.processor.config;
 
 import javax.servlet.Filter;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class HelloWorldInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+import Jetty2Log4j2Bridge.Jetty2Log4j2Bridge;
 
-	
+public class BatchMonitorAPIWebServiceInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
 	@Override
 	public void onStartup(javax.servlet.ServletContext servletContext) throws javax.servlet.ServletException {
 		super.onStartup(servletContext);
-		org.eclipse.jetty.util.log.Log.setLog();
+		org.eclipse.jetty.util.log.Log.setLog(new Jetty2Log4j2Bridge("jettyLog"));
 	}
 	
 	@Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] { HelloWorldConfiguration.class };
+        return new Class[] { BatchMonitorConfiguration.class };
     }
    
     @Override

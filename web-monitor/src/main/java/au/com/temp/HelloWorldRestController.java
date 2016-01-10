@@ -1,7 +1,9 @@
 package au.com.temp;
  
 import java.util.List;
- 
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,19 +22,20 @@ import au.com.temp.service.UserService;
 @RestController
 @RequestMapping("/temp")
 public class HelloWorldRestController {
- 
+	private Logger logger = LogManager.getLogger(this.getClass().getName());
     @Autowired
     UserService userService;  //Service which will do all data retrieval/manipulation work
  
      
     //-------------------Retrieve All Users--------------------------------------------------------
      
-    @RequestMapping(value = "/user/", method = RequestMethod.GET)
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
     public ResponseEntity<List<User>> listAllUsers() {
         List<User> users = userService.findAllUsers();
         if(users.isEmpty()){
             return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
         }
+        logger.info("Fetching All Users.");
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
     }
  
@@ -41,10 +44,11 @@ public class HelloWorldRestController {
      
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> getUser(@PathVariable("id") long id) {
-        System.out.println("Fetching User with id " + id);
+        logger.info("Fetching User with id " + id);
+
         User user = userService.findById(id);
         if (user == null) {
-            System.out.println("User with id " + id + " not found");
+            logger.info("User with id " + id + " not found");
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<User>(user, HttpStatus.OK);
@@ -56,10 +60,10 @@ public class HelloWorldRestController {
      
     @RequestMapping(value = "/user/", method = RequestMethod.POST)
     public ResponseEntity<Void> createUser(@RequestBody User user,    UriComponentsBuilder ucBuilder) {
-        System.out.println("Creating User " + user.getName());
+        logger.info("Creating User " + user.getName());
  
         if (userService.isUserExist(user)) {
-            System.out.println("A User with name " + user.getName() + " already exist");
+            logger.info("A User with name " + user.getName() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
  
@@ -75,12 +79,12 @@ public class HelloWorldRestController {
      
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
     public ResponseEntity<User> updateUser(@PathVariable("id") long id, @RequestBody User user) {
-        System.out.println("Updating User " + id);
+        logger.info("Updating User " + id);
          
         User currentUser = userService.findById(id);
          
         if (currentUser==null) {
-            System.out.println("User with id " + id + " not found");
+            logger.info("User with id " + id + " not found");
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
  
@@ -96,11 +100,11 @@ public class HelloWorldRestController {
      
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<User> deleteUser(@PathVariable("id") long id) {
-        System.out.println("Fetching & Deleting User with id " + id);
+        logger.info("Fetching & Deleting User with id " + id);
  
         User user = userService.findById(id);
         if (user == null) {
-            System.out.println("Unable to delete. User with id " + id + " not found");
+            logger.info("Unable to delete. User with id " + id + " not found");
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
  
@@ -113,7 +117,7 @@ public class HelloWorldRestController {
      
     @RequestMapping(value = "/user/", method = RequestMethod.DELETE)
     public ResponseEntity<User> deleteAllUsers() {
-        System.out.println("Deleting All Users");
+        logger.info("Deleting All Users");
  
         userService.deleteAllUsers();
         return new ResponseEntity<User>(HttpStatus.NO_CONTENT);

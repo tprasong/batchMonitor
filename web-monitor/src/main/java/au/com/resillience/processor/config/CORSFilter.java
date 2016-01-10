@@ -1,4 +1,4 @@
-package au.com.temp.config;
+package au.com.resillience.processor.config;
 
 import java.io.IOException;
 

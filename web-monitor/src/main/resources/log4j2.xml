@@ -3,10 +3,10 @@
   <Appenders>
     <RollingFile
             name = "RollingFile"
-            fileName = "webMonitor.log"
-            filePattern = "webMonitor.log_v1_%i.log">
+            fileName = "/Users/prasong/Documents/github/batchMonitor/web-monitor/target/webMonitor.log"
+            filePattern = "/Users/prasong/Documents/github/batchMonitor/web-monitor/target/webMonitor.log_v1_%i.log">
             <PatternLayout>
-                <pattern>%d{dd/MMM/yyyy HH:mm:ss,SSS}- %c{1}: %m%n</pattern>
+                <pattern>%d{dd/MMM/yyyy HH:mm:ss,SSS}- %level- %c{1}: %m%n</pattern>
             </PatternLayout>
             <Policies>
                 <SizeBasedTriggeringPolicy size = "10 MB"/>

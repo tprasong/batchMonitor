@@ -15,10 +15,10 @@
 		</New>
 		
 	<New id="sslContextFactory" class="org.eclipse.jetty.util.ssl.SslContextFactory">
-	  <Set name="KeyStorePath"><Property name="jetty.home" default="." />\keystore\webMonitorTest.p12</Set>
+	  <Set name="KeyStorePath"><Property name="jetty.home" default="." />/keystore/webMonitorTest.p12</Set>
 	  <Set name="KeyStorePassword">Password01</Set>
 	  <Set name="KeyManagerPassword">Password01</Set>
-	  <Set name="TrustStorePath"><Property name="jetty.home" default="." />\keystore\webMonitorTest.p12</Set>
+	  <Set name="TrustStorePath"><Property name="jetty.home" default="." />/keystore/webMonitorTest.p12</Set>
 	  <Set name="TrustStorePassword">Password01</Set>
 	</New>
 	<!-- =========================================================== -->
