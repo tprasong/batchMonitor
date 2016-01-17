@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class JobExecution {
+	
 	private Long id;
 	private Long version;
 	private Long jobInstanceId;

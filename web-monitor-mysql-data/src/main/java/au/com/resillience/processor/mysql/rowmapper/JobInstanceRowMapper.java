@@ -11,9 +11,9 @@ public class JobInstanceRowMapper implements RowMapper<JobInstance> {
 
 	public JobInstance mapRow(ResultSet rs, int rownum) throws SQLException {
 		JobInstance jobInstance = new JobInstance();
-		jobInstance.setId(rs.getLong("id"));
-		jobInstance.setKey(rs.getString("key"));
-		jobInstance.setName(rs.getString("name"));
+		jobInstance.setId(rs.getLong("job_instance_id"));
+		jobInstance.setKey(rs.getString("job_key"));
+		jobInstance.setName(rs.getString("job_name"));
 		jobInstance.setVersion(rs.getLong("version"));
 		return jobInstance;
 	}

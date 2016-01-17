@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "au.com.resillience.processor, au.com.temp")
-@ImportResource(value="classpath*:spring-config.xml")
+@ImportResource({"classpath:spring-config.xml", "classpath*:conf/spring-config.xml"})
 public class BatchMonitorConfiguration {
 	
 }

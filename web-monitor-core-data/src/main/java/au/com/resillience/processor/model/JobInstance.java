@@ -3,10 +3,16 @@ package au.com.resillience.processor.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+
 public class JobInstance {
+	@Column(name="JOB_INSTANCE_ID", nullable=false, precision=20, unique=true)
 	private Long id;
+	@Column(name="VERSION", nullable=false, precision=20)
 	private Long version;
+	@Column(name="JOB_NAME", nullable=false, length=100)
 	private String name;
+	@Column(name="JOB_KEY", nullable=true, length=32)
 	private String key;
 	
 	private List<JobExecution> jobExecutionList = new ArrayList<JobExecution>();

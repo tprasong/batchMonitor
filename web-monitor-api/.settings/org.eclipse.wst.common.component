@@ -6,7 +6,10 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
-        <dependent-module archiveName="web-monitor-core-data-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/web-monitor-core-data/web-monitor-core-data">
+        <dependent-module archiveName="web-monitor-core-data-0.0.2-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/web-monitor-core-data/web-monitor-core-data">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="web-monitor-mysql-data-0.0.2-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/web-monitor-mysql-data/web-monitor-mysql-data">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/web-monitor-api/target/classes"/>

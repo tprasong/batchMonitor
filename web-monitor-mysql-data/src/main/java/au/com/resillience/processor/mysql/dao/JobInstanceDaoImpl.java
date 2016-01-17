@@ -24,11 +24,11 @@ public class JobInstanceDaoImpl implements JobInstanceDao {
 	public JobInstanceDaoImpl(DataSource dataSource, @Qualifier("schemaName")String schemaName){
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 		this.schemaName = schemaName;
-		this.SQL_TEMPLATE = "SELECT id, version, name, key FROM "+this.schemaName+"."+TABLE_NAME;
+		this.SQL_TEMPLATE = "SELECT job_instance_id, version, job_name, job_key FROM "+this.schemaName+"."+TABLE_NAME;
 	}
 	
 	public JobInstance get(Long id) {
-		String sql =  SQL_TEMPLATE + " WHERE id = ?";
+		String sql =  SQL_TEMPLATE + " WHERE job_instance_id = ?";
 		JobInstance jobInstance = jdbcTemplate.queryForObject(sql, new Object[]{id}, new JobInstanceRowMapper());
 		return jobInstance;
 	}
@@ -44,14 +44,14 @@ public class JobInstanceDaoImpl implements JobInstanceDao {
 		List<Object> parameters = new ArrayList<Object>(); 
 		if(StringUtils.isEmpty(name) && StringUtils.isEmpty(key)){
 			sql = SQL_TEMPLATE;
-		}else if(StringUtils.isEmpty(name)){			
-			sql = SQL_TEMPLATE + " WHERE name = ?";
+		}else if(!StringUtils.isEmpty(name)){			
+			sql = SQL_TEMPLATE + " WHERE job_name = ?";
 			parameters.add(name);
-		}else if(StringUtils.isEmpty(key)){
-			sql = SQL_TEMPLATE + " WHERE key = ?";
+		}else if(!StringUtils.isEmpty(key)){
+			sql = SQL_TEMPLATE + " WHERE job_key = ?";
 			parameters.add(key);
 		}else{
-			sql = SQL_TEMPLATE + " WHERE name = ? and key = ?";
+			sql = SQL_TEMPLATE + " WHERE job_name = ? and job_key = ?";
 			parameters.add(name);
 			parameters.add(key);
 		}

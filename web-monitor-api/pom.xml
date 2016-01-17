@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>process-resilience</groupId>
 		<artifactId>web-monitor-parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
 		<relativePath>..\web-monitor-parent</relativePath>
 	</parent>
 	
@@ -55,7 +55,12 @@
 		<dependency>
 			<groupId>process-resilience</groupId>
 			<artifactId>web-monitor-core-data</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>process-resilience</groupId>
+			<artifactId>web-monitor-mysql-data</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>

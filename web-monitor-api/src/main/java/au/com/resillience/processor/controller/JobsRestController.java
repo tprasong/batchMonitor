@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import au.com.resillience.processor.model.JobInstance;
@@ -20,10 +21,10 @@ public class JobsRestController {
 	private JobsService jobsService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public List<JobInstance> getJobs(@PathVariable Long id, @PathVariable String name, @PathVariable String key){
+	public List<JobInstance> getJobs(@RequestParam(value="id", required=false) Long id, @RequestParam(value="name", required=false) String name, @RequestParam(value="key", required=false) String key){
 		List<JobInstance> jobInstanceList = new ArrayList<JobInstance>();
 		if(id != null){
-			jobInstanceList.add(jobsService.getJobs(id));
+			jobInstanceList.add(jobsService.getJobs(id.longValue()));
 		}else{
 			jobInstanceList = jobsService.getJobs(name, key);
 		}
