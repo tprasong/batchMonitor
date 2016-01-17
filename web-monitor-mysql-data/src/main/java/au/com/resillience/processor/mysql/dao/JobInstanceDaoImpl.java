@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import au.com.resillience.processor.dao.JobInstanceDao;
 import au.com.resillience.processor.model.JobInstance;
 import au.com.resillience.processor.mysql.rowmapper.JobInstanceRowMapper;
+import au.com.resillience.processor.rowmapper.RowMapperImpl;
 
 public class JobInstanceDaoImpl implements JobInstanceDao {
 
@@ -29,13 +30,13 @@ public class JobInstanceDaoImpl implements JobInstanceDao {
 	
 	public JobInstance get(Long id) {
 		String sql =  SQL_TEMPLATE + " WHERE job_instance_id = ?";
-		JobInstance jobInstance = jdbcTemplate.queryForObject(sql, new Object[]{id}, new JobInstanceRowMapper());
+		JobInstance jobInstance = jdbcTemplate.queryForObject(sql, new Object[]{id}, new RowMapperImpl<JobInstance>(JobInstance.class));
 		return jobInstance;
 	}
 
 	public List<JobInstance> getAll() {
 		String sql =  SQL_TEMPLATE;
-		List<JobInstance> jobInstanceList = jdbcTemplate.query(sql, new JobInstanceRowMapper());				
+		List<JobInstance> jobInstanceList = jdbcTemplate.query(sql, new RowMapperImpl<JobInstance>(JobInstance.class));				
 		return jobInstanceList;
 	}
 
