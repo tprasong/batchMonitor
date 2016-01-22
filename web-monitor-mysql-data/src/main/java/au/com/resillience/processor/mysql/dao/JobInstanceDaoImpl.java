@@ -56,7 +56,7 @@ public class JobInstanceDaoImpl implements JobInstanceDao {
 			parameters.add(name);
 			parameters.add(key);
 		}
-		List<JobInstance> jobInstanceList = jdbcTemplate.query(sql, parameters.toArray(),new JobInstanceRowMapper());
+		List<JobInstance> jobInstanceList = jdbcTemplate.query(sql, parameters.toArray(), new RowMapperImpl<JobInstance>(JobInstance.class));
 		return jobInstanceList;
 	}
 
