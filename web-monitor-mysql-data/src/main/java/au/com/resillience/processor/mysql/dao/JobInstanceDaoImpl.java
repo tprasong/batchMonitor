@@ -21,6 +21,9 @@ public class JobInstanceDaoImpl implements JobInstanceDao {
 	private String schemaName; 
 	private final String TABLE_NAME = "BATCH_JOB_INSTANCE";
 	private final String SQL_TEMPLATE;
+	public JobInstanceDaoImpl(){
+		this.SQL_TEMPLATE = "SELECT job_instance_id, version, job_name, job_key FROM "+this.schemaName+"."+TABLE_NAME;
+	}
 	@Autowired
 	public JobInstanceDaoImpl(DataSource dataSource, @Qualifier("schemaName")String schemaName){
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -30,8 +33,12 @@ public class JobInstanceDaoImpl implements JobInstanceDao {
 	
 	public JobInstance get(Long id) {
 		String sql =  SQL_TEMPLATE + " WHERE job_instance_id = ?";
-		JobInstance jobInstance = jdbcTemplate.queryForObject(sql, new Object[]{id}, new RowMapperImpl<JobInstance>(JobInstance.class));
-		return jobInstance;
+		List<JobInstance> jobInstanceList = jdbcTemplate.query(sql, new Object[]{id}, new RowMapperImpl<JobInstance>(JobInstance.class));
+		if(jobInstanceList != null && jobInstanceList.size() > 0)
+		{
+			return jobInstanceList.get(0);
+		}
+		return null;
 	}
 
 	public List<JobInstance> getAll() {
