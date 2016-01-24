@@ -12,9 +12,7 @@ import au.com.resillience.processor.service.JobsService;
 
 public class JobsServiceImpl implements JobsService {
 	private JobInstanceDao jobInstanceDao;
-	public JobsServiceImpl(){
-		
-	}
+
 	@Autowired
 	public JobsServiceImpl(JobInstanceDao jobInstanceDao){
 		this.jobInstanceDao = jobInstanceDao; 

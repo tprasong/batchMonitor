@@ -54,4 +54,10 @@
 		</plugin>
 		</plugins>
 	</build>
+  <modules>
+  	<module>../web-monitor-core-data</module>
+  	<module>../web-monitor-mysql-data</module>
+  	<module>../web-monitor-api</module>
+  </modules>
+  
 </project>

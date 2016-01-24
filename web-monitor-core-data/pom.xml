@@ -3,6 +3,12 @@
   <groupId>process-resilience</groupId>
   <artifactId>web-monitor-core-data</artifactId>
   <version>0.0.2-SNAPSHOT</version>
+  <parent>
+		<groupId>process-resilience</groupId>
+		<artifactId>web-monitor-parent</artifactId>
+		<version>0.0.2-SNAPSHOT</version>
+		<relativePath>..\web-monitor-parent</relativePath>
+	</parent>
 <properties>
 		<java.version>1.8</java.version>
 		<junit.version>4.12</junit.version>

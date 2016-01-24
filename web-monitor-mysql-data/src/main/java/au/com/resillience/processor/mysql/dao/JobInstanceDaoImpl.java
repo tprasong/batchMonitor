@@ -3,14 +3,17 @@ package au.com.resillience.processor.mysql.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.StringUtils;
 
 import au.com.resillience.processor.dao.JobInstanceDao;
+import au.com.resillience.processor.dao.query.SimpleQueryGenerator;
 import au.com.resillience.processor.model.JobInstance;
 import au.com.resillience.processor.mysql.rowmapper.JobInstanceRowMapper;
 import au.com.resillience.processor.rowmapper.RowMapperImpl;
@@ -18,17 +21,18 @@ import au.com.resillience.processor.rowmapper.RowMapperImpl;
 public class JobInstanceDaoImpl implements JobInstanceDao {
 
 	private JdbcTemplate jdbcTemplate;	
-	private String schemaName; 
-	private final String TABLE_NAME = "BATCH_JOB_INSTANCE";
-	private final String SQL_TEMPLATE;
-	public JobInstanceDaoImpl(){
-		this.SQL_TEMPLATE = "SELECT job_instance_id, version, job_name, job_key FROM "+this.schemaName+"."+TABLE_NAME;
-	}
+	//private String schemaName; 
+	//private final String TABLE_NAME = "BATCH_JOB_INSTANCE";
+	private String SQL_TEMPLATE;
 	@Autowired
-	public JobInstanceDaoImpl(DataSource dataSource, @Qualifier("schemaName")String schemaName){
+	private SimpleQueryGenerator simpleQueryGenerator;
+	@Autowired
+	public JobInstanceDaoImpl(DataSource dataSource){
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
-		this.schemaName = schemaName;
-		this.SQL_TEMPLATE = "SELECT job_instance_id, version, job_name, job_key FROM "+this.schemaName+"."+TABLE_NAME;
+	}
+	@PostConstruct
+	public void setSqlTemplate(){
+		this.SQL_TEMPLATE = simpleQueryGenerator.getQueryStatement(JobInstance.class);//"SELECT job_instance_id, version, job_name, job_key FROM "+this.schemaName+"."+TABLE_NAME;
 	}
 	
 	public JobInstance get(Long id) {

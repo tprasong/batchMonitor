@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Table;
 
+@Table(name="BATCH_JOB_INSTANCE")
 public class JobInstance {
 	@Column(name="JOB_INSTANCE_ID", nullable=false, precision=20, unique=true)
 	private Long id;
